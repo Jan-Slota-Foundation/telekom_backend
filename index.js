@@ -49,6 +49,16 @@ app.get("/test", (req, res) => {
     res.send("test test");
 });
 
+
+
+//csv, str
+app.post("/analyze",(res, req) =>{
+    
+    const data = req.body;
+    console.log(data);
+    res.send("Data sent succesfully");
+});
+
 // Using async/await to wait for CSV processing
 async function initializeServer() {
     try {
