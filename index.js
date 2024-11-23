@@ -1,7 +1,9 @@
 const express = require("express");
 var cors = require("cors");
 const app = express();
-
+const csv = require("csv-parser");
+const fs = require("fs");
+const results = [];
 
 
 app.use(cors()); // ak das toto prec bude incident
@@ -25,3 +27,12 @@ app.listen(PORT, ()=>{
     console.log(`Server runnuje ${PORT}`);
 })
 
+
+
+const readCSV = () => {
+    fs.createReadStream("./juice-shop_vulnerabilities_2024-11-14T1526.csv")
+    .on('error', (error) => {
+        console.error("Error reading file:", file);
+    })
+    
+}
