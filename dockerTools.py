@@ -59,16 +59,10 @@ async def stop_docker_container(docker_param: str) -> Dict[str, str]:
     except Exception as error:
         raise RuntimeError(f"exec error: {str(error)}")
 
-async def main():
-    """Main function for testing the Docker functions."""
+async def startAiCrawler(prompt):
+    # in poetry shell
     try:
-        container_id = await run_docker_container('bkimminich/juice-shop')
-        print('Container started with ID:', container_id)
-        
-        # Wait 10 seconds then reset
-        await asyncio.sleep(10)
-        
-        new_id = await reset_docker_container(container_id)
-        print('Container reset with new ID:', new_id)
+        stdout, stderr = await execute_command(f"python -m chromegpt -v -a auto-gpt -m gpt-4.0-turbo-preview -t \"{prompt}\" ")
+        return {"stdout": stdout, "stderr": stderr}
     except Exception as error:
-        print('Error:', error)
+        raise RuntimeError(f"exec error: {str(error)}")
